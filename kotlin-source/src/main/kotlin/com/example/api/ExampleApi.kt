@@ -123,7 +123,7 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                 Response {
 
         try {
-            val bondState = rpcOps.startFlow(::SelfIssueCashFlow, name, amount, unit, duration, interest).returnValue.get()
+            val bondState = rpcOps.startFlow(::BondIssueFlow, name, amount, unit, duration, interest).returnValue.get()
             return Response.status(Response.Status.CREATED).entity(bondState.toString()).build()
 
         } catch (e: Exception) {
