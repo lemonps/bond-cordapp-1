@@ -43,11 +43,11 @@ object BondSchemaV1 : MappedSchema(
             @Column(name = "unit")
             var unit: Int,
 
-            @Column(name = "issue-date")
-            var issueDate: String,
-
-            @Column(name = "maturity-date")
-            var maturityDate: String,
+//            @Column(name = "issue-date")
+//            var issueDate: String,
+//
+//            @Column(name = "maturity-date")
+//            var maturityDate: String,
 
             @Column(name = "interest-rate")
             var interestRate: Double,
@@ -56,6 +56,6 @@ object BondSchemaV1 : MappedSchema(
             var linearId: UUID
     ) : PersistentState() {
         // Default constructor required by hibernate.
-        constructor(): this("","","", 0, 0, 0, 0, "", "", 0.0, UUID.randomUUID())
+        constructor(): this("","","", 0, 0, 0, 0,0.0, UUID.randomUUID())
     }
 }

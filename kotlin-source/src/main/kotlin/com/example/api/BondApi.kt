@@ -125,7 +125,7 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                 Response {
         val me = rpcOps.nodeInfo().legalIdentities.first()
         try {
-            val bondState = BondState(me, me, name, duration,100000, amount, unit, Calendar.getInstance().time,Calendar.getInstance().time, interest, UniqueIdentifier())
+            val bondState = BondState(me, me, name, duration,100000, amount, unit, interest, UniqueIdentifier())
             rpcOps.startFlow(::BondIssueFlow, bondState).returnValue.get()
             return Response.status(Response.Status.CREATED).entity("Issue Bond Successfully").build()
 
