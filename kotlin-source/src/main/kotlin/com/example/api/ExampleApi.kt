@@ -112,16 +112,15 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                 return Response.ok(results).build()
         }
     }
-        @GET
+
+    @GET
     @Path("agent-issue-bond")
     fun issueBond (@QueryParam(value = "Bond_Name") name: String,
                    @QueryParam(value = "Amount") amount: Int,
                    @QueryParam(value = "Price_Per_Unit") unit: Int,
                    @QueryParam(value = "Duration") duration: String,
-                   @QueryParam(value = "Interest_Rate") interest: Int,
-
+                   @QueryParam(value = "Interest_Rate") interest: Int):
                 Response {
-
         try {
             val bondState = rpcOps.startFlow(::BondIssueFlow, name, amount, unit, duration, interest).returnValue.get()
             return Response.status(Response.Status.CREATED).entity(bondState.toString()).build()
