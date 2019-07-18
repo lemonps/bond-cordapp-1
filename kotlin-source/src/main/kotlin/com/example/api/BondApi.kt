@@ -121,11 +121,11 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                    @QueryParam(value = "Amount") amount: Int,
                    @QueryParam(value = "Price_Per_Unit") unit: Int,
                    @QueryParam(value = "Duration") duration: Int,
-                   @QueryParam(value = "Interest_Rate") interest: Int):
+                   @QueryParam(value = "Interest_Rate") interest: Double):
                 Response {
         val me = rpcOps.nodeInfo().legalIdentities.first()
         try {
-            val bondState = BondState(me, me, name, duration,100000, amount, unit, Calendar.getInstance(),Calendar.getInstance(), 2.4, UniqueIdentifier())
+            val bondState = BondState(me, me, name, duration,100000, amount, unit, Calendar.getInstance().time,Calendar.getInstance().time, interest, UniqueIdentifier())
             rpcOps.startFlow(::BondIssueFlow, bondState).returnValue.get()
             return Response.status(Response.Status.CREATED).entity("Issue Bond Successfully").build()
 

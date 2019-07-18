@@ -19,8 +19,8 @@ data class BondState(
                     val total: Int,
                     val amount: Int,
                     val unit: Int,
-                    val issueDate: Calendar,
-                    val maturityDate: Calendar,
+                    val issueDate: Date,
+                    val maturityDate: Date,
                     val interestRate: Double,
                     override val linearId: UniqueIdentifier = UniqueIdentifier()):
         LinearState, QueryableState {
