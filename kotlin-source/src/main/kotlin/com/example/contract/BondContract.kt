@@ -19,10 +19,10 @@ import net.corda.core.transactions.LedgerTransaction
  *
  * All contracts must sub-class the [Contract] interface.
  */
-class IOUContract : Contract {
+class BondContract : Contract {
     companion object {
         @JvmStatic
-        val IOU_CONTRACT_ID = "com.example.contract.IOUContract"
+        val IOU_CONTRACT_ID = "com.example.contract.BondContract"
     }
 
     /**

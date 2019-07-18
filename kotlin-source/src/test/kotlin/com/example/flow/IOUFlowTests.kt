@@ -39,7 +39,7 @@ class IOUFlowTests {
         val future = a.startFlow(flow)
         network.runNetwork()
 
-        // The IOUContract specifies that IOUs cannot have negative values.
+        // The BondContract specifies that IOUs cannot have negative values.
         assertFailsWith<TransactionVerificationException> { future.getOrThrow() }
     }
 
