@@ -5,6 +5,7 @@ import com.example.schema.IOUSchemaV1
 import com.example.state.BondState
 import net.corda.core.identity.CordaX500Name
 import net.corda.core.messaging.CordaRPCOps
+import net.corda.core.messaging.startFlow
 import net.corda.core.messaging.startTrackedFlow
 import net.corda.core.messaging.vaultQueryBy
 import net.corda.core.node.services.IdentityService
@@ -111,16 +112,15 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                 return Response.ok(results).build()
         }
     }
-        @GET
+
+    @GET
     @Path("agent-issue-bond")
     fun issueBond (@QueryParam(value = "Bond_Name") name: String,
                    @QueryParam(value = "Amount") amount: Int,
                    @QueryParam(value = "Price_Per_Unit") unit: Int,
                    @QueryParam(value = "Duration") duration: String,
-                   @QueryParam(value = "Interest_Rate") interest: Int,
-
+                   @QueryParam(value = "Interest_Rate") interest: Int):
                 Response {
-
         try {
             val bondState = rpcOps.startFlow(::SelfIssueCashFlow, name, amount, unit, duration, interest).returnValue.get()
             return Response.status(Response.Status.CREATED).entity(bondState.toString()).build()
