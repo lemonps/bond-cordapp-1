@@ -48,5 +48,6 @@ class BondContract : Contract {
      */
     interface Commands : CommandData {
         class Create : Commands
+        class Issue : Commands
     }
 }

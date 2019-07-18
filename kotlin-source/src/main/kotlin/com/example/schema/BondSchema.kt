@@ -40,8 +40,8 @@ object BondSchemaV1 : MappedSchema(
             @Column(name = "amount")
             var amount: Int,
 
-            @Column(name = "principal")
-            var principal: Int,
+            @Column(name = "unit")
+            var unit: Int,
 
             @Column(name = "issue-date")
             var issueDate: String,
