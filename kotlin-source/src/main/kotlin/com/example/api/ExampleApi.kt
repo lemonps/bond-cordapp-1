@@ -2,7 +2,7 @@ package com.example.api
 
 import com.example.flow.ExampleFlow.Initiator
 import com.example.schema.IOUSchemaV1
-import com.example.state.IOUState
+import com.example.state.BondState
 import net.corda.core.identity.CordaX500Name
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.messaging.startTrackedFlow
@@ -60,7 +60,7 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
     @GET
     @Path("ious")
     @Produces(MediaType.APPLICATION_JSON)
-    fun getIOUs() = rpcOps.vaultQueryBy<IOUState>().states
+    fun getIOUs() = rpcOps.vaultQueryBy<BondState>().states
 
     /**
      * Initiates a flow to agree an IOU between two parties.
@@ -107,7 +107,7 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
                 var partyType = IOUSchemaV1.PersistentIOU::lenderName.equal(rpcOps.nodeInfo().legalIdentities.first().name.toString())
                 val customCriteria = QueryCriteria.VaultCustomQueryCriteria(partyType)
                 val criteria = generalCriteria.and(customCriteria)
-                val results = rpcOps.vaultQueryBy<IOUState>(criteria).states
+                val results = rpcOps.vaultQueryBy<BondState>(criteria).states
                 return Response.ok(results).build()
         }
     }
